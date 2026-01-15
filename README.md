@@ -101,7 +101,69 @@ For a future fixture, the model outputs:
 - Clean sheet probabilities
 - Most likely scoreline
 - Expected:
-+ shots
-+ shots on target
-+ corners
-+ yellow & red cards
+  + shots
+  + shots on target
+  + corners
+  + yellow & red cards
+
+Player-level Predictions
+====================================
+
+Team-level expectations are allocated to players using FPL metrics.
+
+Allocation logic
+- Goals → xG/90 × expected minutes
+- Assists → xA/90 × expected minutes
+- Shots → threat × expected minutes
+- Shots on target → xG-weighted minutes
+- Yellow cards → historical YC/90 × minutes
+
+Expected counts are converted into probabilities using a Poisson assumption.
+
+Output
+====================================
+
+For each fixture:
+- Expected goals (λ_home, λ_away)
+- Home / Draw / Away probabilities
+- Clean sheet probabilities
+- Most likely scoreline
+- Expected:
+  + shots
+  + shots on target
+  + corners
+  + yellow & red cards
+- Top 3 likely scorers
+- Top 3 likely assisters
+- Top 3 likely shooters
+- Top 3 likely shots on target
+- Top 3 most likely to receive a yellow card
+
+Tech Stack
+====================================
+
+- Python
+- pandas / numpy
+- scikit-learn (PoissonRegressor)
+- matplotlib
+- requests (FPL API)
+
+Limitations
+====================================
+
+- No confirmed lineups (minutes are probabilistic)
+- No in-game state modelling (e.g. red cards)
+- Uses goals, not true event-level xG
+- Does not incorporate bookmaker odds (yet)
+
+These are deliberate trade-offs to keep the model interpretable and reproducible.
+
+Future Improvements
+====================================
+
+-	Incorporate lineup confirmation and substitutions
+-	Replace goals with event-level xG
+-	Model red-card states explicitly
+-	Compare against bookmaker probabilities
+-	Extend to rolling season-by-season backtests
+-	Add Bayesian updating for player minutes
