@@ -15,6 +15,7 @@ The model predicts:
 - top 3 most likely players to score, assist, shoot, hit the target, or receive a yellow card in a given match
 
 Project Goals:
+==================
 - Build a transparent, classical ML baseline for football prediction
 - Avoid data leakage with strict chronological splits
 - Evaluate models honestly using Poisson deviance
@@ -22,6 +23,7 @@ Project Goals:
 - Create a framework extensible to xG, lineups, and betting comparisons
 
 Data Sources: 
+==================
 
 Match Level Data:
 
@@ -45,6 +47,7 @@ Pulled from the Fantasy Premier League API:
 - availability probabilities
 
 Modelling Approach:
+========================
 
 Team-level models
 
@@ -64,6 +67,7 @@ Key features include:
 - interaction terms (attack × defence)
 
 Time decay:
+==================
 
 Older matches receive less weight using an exponential half-life:
 
@@ -72,6 +76,7 @@ weight = 0.5^(age in years/half-life)
 This allows the model to adapt to tactical and squad changes over time.
 
 Primary metric: Poisson deviance
+====================================
 
 Measures how well predicted means (λ) match observed counts
 Evaluated per match and in aggregate
@@ -86,3 +91,17 @@ Typical performance:
 - Away goals deviance ≈ 1.00–1.05
 
 These values are strong for classical football models.
+
+Match-level Predictions
+====================================
+
+For a future fixture, the model outputs:
+- Expected goals (λ_home, λ_away)
+- Home / Draw / Away probabilities
+- Clean sheet probabilities
+- Most likely scoreline
+- Expected:
++ shots
++ shots on target
++ corners
++ yellow & red cards
