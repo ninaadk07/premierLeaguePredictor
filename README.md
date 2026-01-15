@@ -2,10 +2,10 @@
 # Premier League Match & Player Prediction using Poisson Models
 
 This project builds a probabilistic football prediction system for the English Premier League using Poisson regression, combining:
-	•	historical match data (goals, shots, corners, cards)
-	•	time-decayed team strength features
-	•	rigorous train / validation / test evaluation
-	•	player-level allocation using the Fantasy Premier League (FPL) API
+- historical match data (goals, shots, corners, cards)
+- time-decayed team strength features
+- rigorous train / validation / test evaluation
+- player-level allocation using the Fantasy Premier League (FPL) API
 
 The model predicts:
 	•	expected goals for home & away teams
